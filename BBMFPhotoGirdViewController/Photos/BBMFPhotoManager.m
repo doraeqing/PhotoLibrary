@@ -61,6 +61,21 @@ PHOTOS_STATIC_INLINE BBMFAssetMediaType (_BBMFAssetMediaTypeFromPHAsset)(PHAsset
     return instance;
 }
 
+#pragma mark - Authorization
+- (PHAuthorizationStatus)authorizationStatus {
+    return [PHPhotoLibrary authorizationStatus];
+}
+
+- (void)requestAuthorization:(void (^)(PHAuthorizationStatus))handler {
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        [PHPhotoLibrary requestAuthorization:^(PHAuthorizationStatus status) {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                !handler ? : handler(status);
+            });
+        }];
+    });
+}
+
 #pragma mark - Request
 
 /// 获取相册

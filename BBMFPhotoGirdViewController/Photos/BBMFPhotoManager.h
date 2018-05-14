@@ -23,6 +23,20 @@ typedef NS_ENUM(NSInteger, BBMFFilterAssetMediaType) {
 + (instancetype)defaultManager;
 
 /**
+ 相册认证状态
+ 
+ @return 相册认证结果
+ */
+- (PHAuthorizationStatus)authorizationStatus;
+
+/**
+ 请求访问用户相册
+ 
+ @param handler 访问权限结果回调
+ */
+- (void)requestAuthorization:(void (^) (PHAuthorizationStatus status))handler;
+
+/**
  获取所有的相册
 
  @param completion 返回所有的相册

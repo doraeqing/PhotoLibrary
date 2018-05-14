@@ -21,11 +21,33 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self.view addSubview:[self tableView]];
-    [[BBMFPhotoManager defaultManager] requestAssetCollectionCompletion:^(NSArray<BBMFAssetCollection *> *assetCollection, NSDictionary *options) {
-        self.assetCollection = assetCollection;
-        self.title = self.assetCollection.firstObject.name;
-        [[self tableView] reloadData];
-    }];
+    
+    void (^requestAssetCollectionBlock) (void) = ^{
+        [[BBMFPhotoManager defaultManager] requestAssetCollectionCompletion:^(NSArray<BBMFAssetCollection *> *assetCollection, NSDictionary *options) {
+            self.assetCollection = assetCollection;
+            self.title = self.assetCollection.firstObject.name;
+            [[self tableView] reloadData];
+        }];
+    };
+    
+    void (^requestAuthorizationBlock) (void) = ^ {
+        [[BBMFPhotoManager defaultManager] requestAuthorization:^(PHAuthorizationStatus status) {
+            if (status != PHAuthorizationStatusAuthorized) {
+                UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"你没有允许访问相册的权限" message:@"可以到设置页面开启权限" preferredStyle:UIAlertControllerStyleAlert];
+                UIAlertAction *action = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:nil];
+                [alert addAction:action];
+                [self presentViewController:alert animated:YES completion:nil];
+            } else {
+                requestAssetCollectionBlock();
+            }
+        }];
+    };
+
+    if ([[BBMFPhotoManager defaultManager] authorizationStatus] != PHAuthorizationStatusAuthorized) {
+        requestAuthorizationBlock();
+    } else {        
+        requestAssetCollectionBlock();
+    }
 }
 
 - (void)viewWillLayoutSubviews {

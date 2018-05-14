@@ -147,6 +147,8 @@
 				F282F072206A485B00C6CF17 /* Photos */,
 				F282F03D206A483F00C6CF17 /* AppDelegate.h */,
 				F282F03E206A483F00C6CF17 /* AppDelegate.m */,
+				F282F040206A483F00C6CF17 /* ViewController.h */,
+				F282F041206A483F00C6CF17 /* ViewController.m */,
 				F282F043206A483F00C6CF17 /* Main.storyboard */,
 				F282F046206A483F00C6CF17 /* Assets.xcassets */,
 				F282F048206A483F00C6CF17 /* LaunchScreen.storyboard */,
@@ -177,8 +179,6 @@
 		F282F072206A485B00C6CF17 /* Photos */ = {
 			isa = PBXGroup;
 			children = (
-				F282F040206A483F00C6CF17 /* ViewController.h */,
-				F282F041206A483F00C6CF17 /* ViewController.m */,
 				F282F06F206A485700C6CF17 /* BBMFPhotoGirdViewController.h */,
 				F282F070206A485700C6CF17 /* BBMFPhotoGirdViewController.m */,
 				F282F073206A488400C6CF17 /* BBMFPhotoGirdCell.h */,
