@@ -11,8 +11,6 @@
 #import "BBMFPhotoForceTouchPeekViewController.h"
 #import "BBMFPhotoGirdCell.h"
 
-// 张家港圣浩网络科技有限公司 东方新天地 汇金中心207 大新镇大新村18组15号
-
 CGFloat const kBBMFMinimumLineInteritemSpacing = 0.5;
 NSInteger const kBBMFPhotoColumnCount = 3;
 
